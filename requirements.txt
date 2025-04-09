@@ -6,4 +6,3 @@ Pillow
 opencv-python
 scikit-learn
 gdown
-cv2
