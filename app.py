@@ -9,7 +9,7 @@ import numpy as np
 import cv2
 
 # Google Drive file download
-url = "https://drive.google.com/file/d/1dj8cNs-PFAQTPGkxX_RoK9BdBdEvrkVI"
+url = "https://drive.google.com/uc?id=1dj8cNs-PFAQTPGkxX_RoK9BdBdEvrkVI"
 output = "Resnet50-from-scratch-with-New-Plant-Disease.pth"
 gdown.download(url, output, quiet=False)
 
