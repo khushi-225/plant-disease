@@ -36,30 +36,30 @@ transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
-def load_model(weights_path):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = models.resnet50(weights=None)
-    model.fc = nn.Linear(model.fc.in_features, 15)  # Ensure this matches the saved model
-    
-    # Load model and print missing/mismatched keys
-    checkpoint = torch.load(weights_path, map_location=device)
-    missing_keys, unexpected_keys = model.load_state_dict(checkpoint, strict=False)
-    
-    print("Missing keys:", missing_keys)
-    print("Unexpected keys:", unexpected_keys)
-
-    model.to(device)
-    model.eval()
-    return model, device
-
 # def load_model(weights_path):
 #     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 #     model = models.resnet50(weights=None)
-#     model.fc = nn.Linear(model.fc.in_features, 15)
-#     model.load_state_dict(torch.load(weights_path, map_location=device))
+#     model.fc = nn.Linear(model.fc.in_features, 38)  # Ensure this matches the saved model
+    
+#     # Load model and print missing/mismatched keys
+#     checkpoint = torch.load(weights_path, map_location=device)
+#     missing_keys, unexpected_keys = model.load_state_dict(checkpoint, strict=False)
+    
+#     print("Missing keys:", missing_keys)
+#     print("Unexpected keys:", unexpected_keys)
+
 #     model.to(device)
 #     model.eval()
 #     return model, device
+
+def load_model(weights_path):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = models.resnet50(weights=None)
+    model.fc = nn.Linear(model.fc.in_features, 38)
+    model.load_state_dict(torch.load(weights_path, map_location=device))
+    model.to(device)
+    model.eval()
+    return model, device
 
 def predict(image, model, device):
     image = transform(image).unsqueeze(0).to(device)
